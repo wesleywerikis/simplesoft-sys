@@ -3,6 +3,8 @@ package br.com.simplesoft.view;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
@@ -11,6 +13,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
+
+import br.com.simplesoft.controller.LoginController;
 
 public class Login {
 
@@ -79,6 +83,12 @@ public class Login {
 		frameLogin.getContentPane().add(pfLogin_Senha);
 		
 		JButton btnLogin_Login = new JButton("Login");
+		btnLogin_Login.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+		        LoginController controller = new LoginController(Login.this);
+		        controller.logar();
+		    }
+		});
 		btnLogin_Login.setFont(new Font("Yu Gothic UI Semibold", Font.PLAIN, 11));
 		btnLogin_Login.setBackground(Color.WHITE);
 		btnLogin_Login.setBounds(47, 165, 203, 23);
@@ -88,5 +98,17 @@ public class Login {
 		lblLogin_Background.setIcon(new ImageIcon(Login.class.getResource("img/img-login/img-fnd.png")));
 		lblLogin_Background.setBounds(0, 0, 300, 340);
 		frameLogin.getContentPane().add(lblLogin_Background);
+	}
+	
+	public String getUsername() {
+		return tfLogin_Usuario.getText();
+	}
+
+	public char[] getPassword() {
+		return pfLogin_Senha.getPassword();
+	}
+
+	public void dispose() {
+		frameLogin.dispose();
 	}
 }
